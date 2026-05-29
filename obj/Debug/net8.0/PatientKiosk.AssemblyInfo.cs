@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PatientKiosk")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4e2fce096887d7b5345cde972e501291df7b234")]
 [assembly: System.Reflection.AssemblyProductAttribute("PatientKiosk")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PatientKiosk")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
