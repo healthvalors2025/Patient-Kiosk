@@ -1,6 +1,17 @@
+# Visual Studio
+.vs/
+
+# Build folders
 bin/
 obj/
-.vs/
+
+# User files
 *.user
 *.suo
+
+# Cache files
 *.cache
+
+# Logs
+logs/
+*.log

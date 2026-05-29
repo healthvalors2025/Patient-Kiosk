@@ -12,4 +12,11 @@
         public int DoctorID { get; set; }
         public string? DoctorName { get; set; }
     }
+    public class DoctorDetailsResponseModel
+    {
+        public int DoctorID { get; set; }
+        public string? DoctorName { get; set; }
+        public string? HospitalName { get; set; }
+        public string? SkillSet { get; set; }
+    }
 }
