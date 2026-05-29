@@ -6,7 +6,6 @@
         public int SkillSetIDF { get; set; }
 
     }
-
     public class DoctorResponseModel
     {
         public int DoctorID { get; set; }
