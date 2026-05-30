@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
 
 namespace PatientKiosk.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class AdvanceDepositController : ControllerBase
@@ -15,7 +17,7 @@ namespace PatientKiosk.Controllers
         {
             _advanceDepositService = advanceDepositService;
         }
-
+        [Authorize]
         [HttpPost]
         [Route("save-advance-deposit")]
         public async Task<IActionResult> SaveAdvanceDeposit([FromBody] AdvanceDepositModel depositmodel)

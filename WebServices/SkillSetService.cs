@@ -19,10 +19,9 @@ namespace PatientKiosk.WebServices
             var list = new List<SkillSetResponseModel>();
             var skillSetParams = new[]
             {
-                new SqlParameter("@SkillSetID", requestModel.SkillSetID),
-                new SqlParameter("@SkillSetName", requestModel.SkillSetName ?? (object)DBNull.Value)
+                new SqlParameter("@HospitalGroupIDF", requestModel.HospitalGroupIDF)
             };
-            list = await _dbHelper.QueryAsync<SkillSetResponseModel>("Kiosk_API_SkillSet_GetList", CommandType.StoredProcedure, skillSetParams);
+            list = await _dbHelper.QueryAsync<SkillSetResponseModel>("API_SP_GetStandardSkillSetList", CommandType.StoredProcedure, skillSetParams);
             return list;
         }
     }

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
 
 namespace PatientKiosk.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class OPDTestReceiptController : ControllerBase
@@ -14,6 +16,7 @@ namespace PatientKiosk.Controllers
         {
             _OPDTestReceiptService = OPDTestReceiptService;
         }
+        [Authorize]
         [HttpPost]
         [Route("get-opd-test-receipt")]
         public async Task<IActionResult> GetOPDTestReceipt([FromBody] OPDTestReceiptRequestModel requestModel)

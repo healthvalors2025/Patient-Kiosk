@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
 
 namespace PatientKiosk.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class DoctorController : ControllerBase
@@ -14,6 +16,7 @@ namespace PatientKiosk.Controllers
         {
             _doctorService = doctorService;
         }
+        [Authorize]
         [HttpPost]
         [Route("get-doctor-list")]
         public async Task<IActionResult> GetDoctorList([FromQuery] DoctorRequestModel requestModel)

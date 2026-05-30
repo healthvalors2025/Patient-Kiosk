@@ -6,6 +6,7 @@ using PatientKiosk.WebServices;
 
 namespace PatientKiosk.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PatientSearchController : ControllerBase
@@ -19,7 +20,7 @@ namespace PatientKiosk.Controllers
         }
 
 
-       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("get-patient-detail")]
         public async Task<IActionResult> GetPatientSearchDeatil([FromBody] PatientSearchModel patientSearch)

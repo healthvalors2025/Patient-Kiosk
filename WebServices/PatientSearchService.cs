@@ -24,7 +24,7 @@ namespace PatientKiosk.WebServices
                 new SqlParameter("@CRNo", searchModel.CRNo ?? (object)DBNull.Value),
                 new SqlParameter("@HospitalIDF", searchModel.HospitalIDF)
             };
-            list = await _dbHelper.QueryAsync<PatientDetail>("Sp_KioskPatientSearch",CommandType.StoredProcedure,patientParams);
+            list = await _dbHelper.QueryAsync<PatientDetail>("Kiosk_API_PatientSearch", CommandType.StoredProcedure,patientParams);
             return list;
         }   
     }

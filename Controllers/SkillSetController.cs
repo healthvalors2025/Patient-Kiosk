@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
 
 namespace PatientKiosk.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class SkillSetController : ControllerBase
@@ -14,6 +16,8 @@ namespace PatientKiosk.Controllers
         {
             _skillSetService = skillSetService;
         }
+
+        [Authorize]
         [HttpPost]
         [Route("get-skill-set")]
         public async Task<IActionResult> GetSkillSet([FromBody] SkillSetRequestModel requestModel)

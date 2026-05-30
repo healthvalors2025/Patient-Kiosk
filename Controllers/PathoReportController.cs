@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
 
 namespace PatientKiosk.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PathoReportController : ControllerBase
@@ -15,6 +17,8 @@ namespace PatientKiosk.Controllers
         {
             _pathoReportService = pathoReportService;
         }
+
+        [Authorize]
         [HttpPost]
         [Route("get-patho-report-list")]
         public async Task<IActionResult> GetPathoReportList([FromQuery] PathoReportRequestModel requestModel)

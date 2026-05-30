@@ -20,7 +20,7 @@ namespace PatientKiosk.WebServices
             var list = new List<PathoReportResponseModel>();
             var pathoReportParams = new[]
             {
-                 new SqlParameter("@HospitalIDF", requestModel.HospitalIDF)
+                 new SqlParameter("@@HospitalGroupIDF", requestModel.HospitalIDF)
             };
             list = await _dbHelper.QueryAsync<PathoReportResponseModel>("Kiosk_API_PathologyReport_GetList", CommandType.StoredProcedure, pathoReportParams);
             return list;
