@@ -15,7 +15,7 @@ namespace PatientKiosk.Controllers
     {
         private readonly IConfiguration _configuration;
         private const string StaticUsername = "Kiosk";
-        private const string StaticPassword = "Kiosk123";
+        private const string StaticPassword = "Kiosk@123";
 
         public AuthController(IConfiguration configuration)
         {
@@ -56,7 +56,6 @@ namespace PatientKiosk.Controllers
             }
 
             var expiresAt = DateTime.UtcNow.AddHours(expiryHours);
-
             var claims = new List<Claim>
             {
                 new Claim("username", request.Username)
@@ -72,17 +71,14 @@ namespace PatientKiosk.Controllers
                 expires: expiresAt,
                 signingCredentials: credentials
             );
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenString = tokenHandler.WriteToken(tokenDescriptor);
-
             var response = new LoginResponse
             {
                 Token = tokenString,
                 ExpiresAtUtc = expiresAt,
                 Username = request.Username
             };
-
             return Ok(response);
         }
     }

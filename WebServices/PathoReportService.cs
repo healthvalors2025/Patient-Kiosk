@@ -9,6 +9,7 @@ namespace PatientKiosk.WebServices
     {
         private readonly IDbConnectionFactory _dbHelper;
         private readonly IConfiguration _configuration;
+        private readonly ILogger _logger;
 
         public PathoReportService(IDbConnectionFactory db, IConfiguration configuration)
         {
@@ -20,7 +21,7 @@ namespace PatientKiosk.WebServices
             var list = new List<PathoReportResponseModel>();
             var pathoReportParams = new[]
             {
-                 new SqlParameter("@@HospitalGroupIDF", requestModel.HospitalIDF)
+                 new SqlParameter("@@HospitalGroupIDF", requestModel.HospitalGroupIDF)
             };
             list = await _dbHelper.QueryAsync<PathoReportResponseModel>("Kiosk_API_PathologyReport_GetList", CommandType.StoredProcedure, pathoReportParams);
             return list;
