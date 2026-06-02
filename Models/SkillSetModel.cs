@@ -12,6 +12,6 @@
         public int? MobileDoctorSkillIDP { get; set; }
         public string? IconPath { get; set; }
         public int? HospitalGroupIDF { get; set; }
-        //public string? EntryDate { get; set; }
     }
 }
+//public string? EntryDate { get; set; }
