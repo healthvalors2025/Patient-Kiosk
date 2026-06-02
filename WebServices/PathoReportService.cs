@@ -16,14 +16,15 @@ namespace PatientKiosk.WebServices
             _dbHelper = db;
             _configuration = configuration;
         }
-         public async Task<List<PathoReportResponseModel>> GetPathoReportListAsync(PathoReportRequestModel requestModel)
+         public async Task<List<PathoReportResponseModel>> GetPathoReportListForPrintAsync(PathoReportRequestModel requestModel)
         {
             var list = new List<PathoReportResponseModel>();
             var pathoReportParams = new[]
             {
-                 new SqlParameter("@@HospitalGroupIDF", requestModel.HospitalGroupIDF)
+                 new SqlParameter("@PatientIDF", requestModel.PatientIDF),
+                 new SqlParameter("@HospitalIDF", requestModel.HospitalIDF)
             };
-            list = await _dbHelper.QueryAsync<PathoReportResponseModel>("Kiosk_API_PathologyReport_GetList", CommandType.StoredProcedure, pathoReportParams);
+            list = await _dbHelper.QueryAsync<PathoReportResponseModel>("Kiosk_API_GetPathologyReportListForPrint", CommandType.StoredProcedure, pathoReportParams);
             return list;
         }
     }

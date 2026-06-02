@@ -20,10 +20,10 @@ namespace PatientKiosk.Controllers
 
         [Authorize]
         [HttpPost]
-        [Route("get-patho-report-list")]
-        public async Task<IActionResult> GetPathoReportList([FromQuery] PathoReportRequestModel requestModel)
+        [Route("get-patho-report-list-for-print")]
+        public async Task<IActionResult> GetPathoReportListForPrint([FromBody] PathoReportRequestModel requestModel)
         {
-            var pathoReportDetail = await _pathoReportService.GetPathoReportListAsync(requestModel);
+            var pathoReportDetail = await _pathoReportService.GetPathoReportListForPrintAsync(requestModel);
             if (pathoReportDetail == null || pathoReportDetail.Count == 0)
             {
                 return NotFound(new

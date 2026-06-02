@@ -101,6 +101,7 @@ builder.Services.AddScoped<AdvanceDepositService>();
 builder.Services.AddScoped<OPDTestReceiptService>();
 builder.Services.AddScoped<DoctorService>();
 builder.Services.AddScoped<SkillSetService>();
+builder.Services.AddScoped<PathoReportService>();
 
 var app = builder.Build();
 

@@ -29,6 +29,19 @@ namespace PatientKiosk.Middlewares
             }
         }
 
+        //private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        //{
+        //    context.Response.ContentType = "application/json";
+        //    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+        //    var payload = new
+        //    {
+        //        error = "An unexpected error occurred.",
+        //    };
+
+        //    var json = JsonSerializer.Serialize(payload);
+        //    return context.Response.WriteAsync(json);
+        //}
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
@@ -36,7 +49,9 @@ namespace PatientKiosk.Middlewares
 
             var payload = new
             {
-                error = "An unexpected error occurred.",
+                error = exception.Message,
+                innerError = exception.InnerException?.Message,
+                stackTrace = exception.StackTrace
             };
 
             var json = JsonSerializer.Serialize(payload);
