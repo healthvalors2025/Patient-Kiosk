@@ -204,7 +204,28 @@ namespace DoctorMobileApp.CommonClass
                                 var value = reader[prop.Name];
                                 // Handle nullable types
                                 var targetType = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
-                                prop.SetValue(obj, Convert.ChangeType(value, targetType));
+                                try
+                                {
+                                    var converted = Convert.ChangeType(value, targetType);
+                                    prop.SetValue(obj, converted);
+                                }
+                                catch (Exception convEx)
+                                {
+                                    // Attach contextual mapping info so middleware can report Model/Property/Expected/Actual
+                                    try
+                                    {
+                                        convEx.Data["Model"] = typeof(T).Name;
+                                        convEx.Data["PropertyName"] = prop.Name;
+                                        convEx.Data["ExpectedType"] = targetType.FullName ?? targetType.Name;
+                                        convEx.Data["ActualValue"] = value == null || value == DBNull.Value ? null : value.ToString();
+                                    }
+                                    catch
+                                    {
+                                        // Best-effort only; swallowing exceptions here to avoid masking original error
+                                    }
+
+                                    throw;
+                                }
                             }
                             list.Add(obj);
                         }
