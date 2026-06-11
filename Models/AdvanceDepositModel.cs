@@ -12,13 +12,13 @@ namespace PatientKiosk.Models
         public int ModeOfPaymentIDF { get; set; }
         public int Kiosk_UserIDF { get; set; }
     }
-    public class AdvanceDepositResponseModel
-    {
-        public int? PatientIDF { get; set; }
-        public int? HospitalIDF { get; set; }
-        public decimal? AdvanceAmount { get; set; }
-        public string? TransactionId { get; set; }
-        public int? ModeOfPaymentIDF { get; set; }
-        public DateTime CreatedDate { get; set; }
-    }
+    //public class AdvanceDepositResponseModel
+    //{
+    //    public int? PatientIDF { get; set; }
+    //    public int? HospitalIDF { get; set; }
+    //    public decimal? AdvanceAmount { get; set; }
+    //    public string? TransactionId { get; set; }
+    //    public int? ModeOfPaymentIDF { get; set; }
+    //    public DateTime CreatedDate { get; set; }
+    //}
 }

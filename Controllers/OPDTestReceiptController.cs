@@ -37,5 +37,35 @@ namespace PatientKiosk.Controllers
                 Data = opdTestReceiptList
             });
         }
+        
+        [Authorize]
+        [HttpPost]
+        [Route("save-opd-test-receipt")]
+        public async Task<IActionResult> SaveOPDTestReceipt([FromBody] SaveOPDTestReceiptRequestModel receiptModel)
+        {
+            if (receiptModel == null)
+            {
+                return BadRequest(new
+                {
+                    Status = false,
+                    Message = "Invalid Request"
+                });
+            }
+            var receiptId = await _OPDTestReceiptService.SaveOPDTestReceiptAsync(receiptModel);
+            if (receiptId <= 0)
+            {
+                return BadRequest(new
+                {
+                    Status = false,
+                    Message = "Failed"
+                });
+            }
+            return Ok(new
+            {
+                Status = true,
+                Message = "OPD Test Receipt Saved Successfully",
+                ReceiptID = receiptId
+            });
+        }
     }
 }
