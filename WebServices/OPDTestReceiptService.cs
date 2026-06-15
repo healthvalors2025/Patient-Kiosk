@@ -36,6 +36,10 @@ namespace PatientKiosk.WebServices
                 dt.Columns.Add("InvestigationType", typeof(int));
                 dt.Columns.Add("Rate", typeof(decimal));
             
+                if (model.OPDTestReceiptList == null || !model.OPDTestReceiptList.Any())
+                {
+                    return 0;
+                }
                 foreach (var item in model.OPDTestReceiptList)
                 {
                     dt.Rows.Add(
@@ -63,7 +67,7 @@ namespace PatientKiosk.WebServices
                    tvpParam,
                    new SqlParameter("@UserIDF", model.UserIDF),
                    new SqlParameter("@UPITransactionNo",
-                   string.IsNullOrEmpty(model.UPITransactionNo)? DBNull.Value: (object)model.UPITransactionNo),
+                   string.IsNullOrWhiteSpace(model.UPITransactionNo)? DBNull.Value: (object)model.UPITransactionNo),
                    voucherParam
                 };
                 await _dbHelper.ExecuteNonQueryAsync("Kiosk_API_OPDTestReceipt_Save", CommandType.StoredProcedure,parameters);
@@ -71,7 +75,7 @@ namespace PatientKiosk.WebServices
             }
             catch( Exception ex) 
             {
-                return 0;
+                throw;
             }
         }
     }
