@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DoctorMobileApp.CommonClass;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
@@ -12,13 +13,15 @@ namespace PatientKiosk.Controllers
     {
         private readonly ILogger<PathoReportController> _logger;
         private readonly PathoReportService _pathoReportService;
-
-        public PathoReportController(PathoReportService pathoReportService)
+        private readonly IDbConnectionFactory _db;
+        private readonly IConfiguration _configuration;
+        public PathoReportController(PathoReportService pathoReportService, IConfiguration configuration,IDbConnectionFactory db)
         {
             _pathoReportService = pathoReportService;
+            _configuration = configuration;
+            _db = db;
         }
 
-        [Authorize]
         [HttpPost]
         [Route("get-patho-report-list-for-print")]
         public async Task<IActionResult> GetPathoReportListForPrint([FromBody] PathoReportRequestModel requestModel)

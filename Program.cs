@@ -1,12 +1,13 @@
 using DoctorMobileApp.CommonClass;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using FluentValidation;
-using FluentValidation.AspNetCore;
-using PatientKiosk.Validators;
 using PatientKiosk.Middlewares;
+using PatientKiosk.Validators;
 using PatientKiosk.WebServices;
+using System.Reflection;
 using System.Text;
 
 
@@ -96,15 +97,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 builder.Services.AddAuthorization();
-builder.Services.AddScoped<PatientSearchService>();
-builder.Services.AddScoped<AdvanceDepositService>();
-builder.Services.AddScoped<OPDTestReceiptService>();
-builder.Services.AddScoped<DoctorService>();
-builder.Services.AddScoped<SkillSetService>();
-builder.Services.AddScoped<PathoReportService>();
-builder.Services.AddScoped<PatientOTPService>();
+var assembly = Assembly.GetExecutingAssembly();
 
-
+var serviceTypes = assembly.GetTypes()
+    .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith("Service"));
+foreach (var serviceType in serviceTypes)
+{
+    builder.Services.AddScoped(serviceType);
+}
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

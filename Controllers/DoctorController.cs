@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DoctorMobileApp.CommonClass;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
@@ -11,12 +12,16 @@ namespace PatientKiosk.Controllers
     public class DoctorController : ControllerBase
     {
         private readonly DoctorService _doctorService;
+        private readonly IDbConnectionFactory _db;
+        private readonly IConfiguration _configuration;
 
-        public DoctorController(DoctorService doctorService)
+        public DoctorController(DoctorService doctorService, IDbConnectionFactory db,IConfiguration configuration)
         {
             _doctorService = doctorService;
+            _db = db;
+            _configuration = configuration;
         }
-        [Authorize]
+
         [HttpPost]
         [Route("get-doctor-list")]
         public async Task<IActionResult> GetDoctorList([FromQuery] DoctorRequestModel requestModel)
@@ -36,9 +41,6 @@ namespace PatientKiosk.Controllers
                 Message = "Success",
                 Data = doctorList
             });
-           
         }
-
-
     }
 }

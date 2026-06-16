@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DoctorMobileApp.CommonClass;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
 using PatientKiosk.WebServices;
@@ -11,13 +12,15 @@ namespace PatientKiosk.Controllers
     public class SkillSetController : ControllerBase
     {
         private readonly SkillSetService _skillSetService;
-
-        public SkillSetController(SkillSetService skillSetService)
+        private readonly IDbConnectionFactory _db;
+        private readonly IConfiguration _configuration;
+        public SkillSetController(SkillSetService skillSetService, IConfiguration configuration,IDbConnectionFactory db)
         {
             _skillSetService = skillSetService;
+            _configuration = configuration;
+            _db = db;
         }
 
-        [Authorize]
         [HttpPost]
         [Route("get-skill-set")]
         public async Task<IActionResult> GetSkillSet([FromBody] SkillSetRequestModel requestModel)
@@ -39,5 +42,4 @@ namespace PatientKiosk.Controllers
             });
         }
     }
-
 }

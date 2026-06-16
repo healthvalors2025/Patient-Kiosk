@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using DoctorMobileApp.CommonClass;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PatientKiosk.Models;
@@ -11,16 +12,18 @@ namespace PatientKiosk.Controllers
     [Route("api/[controller]")]
     public class PatientSearchController : ControllerBase
     {
-        private readonly ILogger<PatientSearchController> _logger;
+        //private readonly ILogger<PatientSearchController> _logger;
         private readonly PatientSearchService _patientSearchService;
+        private readonly IDbConnectionFactory _db;
+        private readonly IConfiguration _configuration;
 
-        public PatientSearchController(PatientSearchService patientSearchService)
+        public PatientSearchController(PatientSearchService patientSearchService,IDbConnectionFactory db,IConfiguration configuration)
         {
             _patientSearchService = patientSearchService;
+            _db = db;
+            _configuration = configuration;
         }
-
-
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        
         [HttpPost]
         [Route("get-patient-detail")]
         public async Task<IActionResult> GetPatientSearchDeatil([FromBody] PatientSearchModel patientSearch)
