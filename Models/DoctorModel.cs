@@ -4,7 +4,7 @@
     {
         public int HospitalIDF { get; set; }
         public int SkillSetIDF { get; set; }
-
+        //Test
     }
     public class DoctorResponseModel
     {
