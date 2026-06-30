@@ -20,3 +20,5 @@ Logs/
 
 # Cache Files
 *.cache
+/.config/dotnet-tools.json
+/Properties/PublishProfiles/FolderProfile.pubxml
