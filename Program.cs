@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PatientKiosk.Middlewares;
-using PatientKiosk.Validators;
 using PatientKiosk.WebServices;
 using System.Reflection;
 using System.Text;
@@ -15,7 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IDbConnectionFactory, SqlHelper>();
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<LoginRequestValidator>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSwaggerGen(options =>
